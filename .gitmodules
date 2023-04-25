@@ -1,0 +1,12 @@
+[submodule "fennel-service-api"]
+	path = fennel-service-api
+	url = git@github.com:fennelLabs/fennel-service-api.git
+[submodule "fennel-api"]
+	path = fennel-api
+	url = git@github.com:fennelLabs/fennel-api.git
+[submodule "fennel-cli"]
+	path = fennel-cli
+	url = git@github.com:fennelLabs/fennel-cli.git
+[submodule "fennel-protocol"]
+	path = fennel-protocol
+	url = git@github.com:fennelLabs/fennel-protocol.git
