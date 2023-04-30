@@ -10,3 +10,9 @@
 [submodule "fennel-protocol"]
 	path = fennel-protocol
 	url = git@github.com:fennelLabs/fennel-protocol.git
+[submodule "subservice"]
+	path = subservice
+	url = git@github.com:fennelLabs/subservice.git
+[submodule "keyserver"]
+	path = keyserver
+	url = git@github.com:fennelLabs/keyserver.git
