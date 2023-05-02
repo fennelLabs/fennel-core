@@ -9,16 +9,10 @@ services:
       - 'keyserver'
       - 'subservice'
       - 'database'
-    volumes:
-      - staticvol:/opt/app/static
-      - mediavol:/opt/app/mediafiles
   fennel-service-api:
     build:
       context: ./fennel-service-api
       dockerfile: Dockerfile
-    volumes:
-      - staticvol:/opt/app/static
-      - mediavol:/opt/app/mediafiles
     environment:
       - DEBUG=True
       - ADMIN_NAME=""
@@ -46,9 +40,6 @@ services:
     build:
       context: ./keyserver
       dockerfile: Dockerfile
-    volumes:
-      - staticvol:/opt/app/static
-      - mediavol:/opt/app/mediafiles
     environment:
       - DEBUG=True
       - ADMIN_NAME=""
@@ -87,5 +78,3 @@ services:
 
 volumes:
   db:
-  staticvol:
-  mediavol:
