@@ -1,0 +1,91 @@
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - 'fennel-service-api'
+      - 'fennel-cli'
+      - 'keyserver'
+      - 'subservice'
+      - 'database'
+    volumes:
+      - staticvol:/opt/app/static
+      - mediavol:/opt/app/mediafiles
+  fennel-service-api:
+    build:
+      context: ./fennel-service-api
+      dockerfile: Dockerfile
+    volumes:
+      - staticvol:/opt/app/static
+      - mediavol:/opt/app/mediafiles
+    environment:
+      - DEBUG=True
+      - ADMIN_NAME=""
+      - ADMIN_EMAIL=""
+      - EMAIL_HOST=""
+      - EMAIL_PORT=""
+      - EMAIL_USERNAME=""
+      - EMAIL_PASSWORD=""
+      - DEFAULT_FROM_EMAIL=""
+      - SERVER_EMAIL=""
+      - ENVIRONMENT="LOCAL"
+      - SECRET_KEY=2HY>fXi!dQ&(9Vf.XghCa;L6G=Ul4r-Bwqh>ae0RG3vIh1ZJ%T
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_NAME=database
+      - ENVIRONMENT=LOCAL
+    depends_on:
+      - 'database'
+  fennel-cli:
+    build:
+      context: ./fennel-cli
+      dockerfile: Dockerfile
+  keyserver:
+    build:
+      context: ./keyserver
+      dockerfile: Dockerfile
+    volumes:
+      - staticvol:/opt/app/static
+      - mediavol:/opt/app/mediafiles
+    environment:
+      - DEBUG=True
+      - ADMIN_NAME=""
+      - ADMIN_EMAIL=""
+      - EMAIL_HOST=""
+      - EMAIL_PORT=""
+      - EMAIL_USERNAME=""
+      - EMAIL_PASSWORD=""
+      - DEFAULT_FROM_EMAIL=""
+      - SERVER_EMAIL=""
+      - ENVIRONMENT="LOCAL"
+      - SECRET_KEY=2HY>fXi!dQ&(9Vf.XghCa;L6G=Ul4r-Bwqh>ae0RG3vIh1ZJ%T
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_NAME=database
+      - ENVIRONMENT=LOCAL
+    depends_on:
+      - 'database'
+  subservice:
+    build:
+      context: ./subservice
+      dockerfile: Dockerfile
+  database:
+    image: 'postgres'
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+  # We'll add fennel-protocol once we're ready to start moving on testnet configuration.
+  # fennel-protocol:
+  # We'll also add fennel-api once we're integrating off-chain messaging.
+  # fennel-api:
+
+volumes:
+  db:
+  staticvol:
+  mediavol:
