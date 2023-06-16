@@ -13,9 +13,6 @@
 [submodule "subservice"]
 	path = subservice
 	url = git@github.com:fennelLabs/subservice.git
-[submodule "keyserver"]
-	path = keyserver
-	url = git@github.com:fennelLabs/keyserver.git
 [submodule "polkadot"]
 	path = polkadot
 	url = git@github.com:fennelLabs/polkadot.git
