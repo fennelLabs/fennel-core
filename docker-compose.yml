@@ -1,62 +1,62 @@
 services:
-  nginx:
-    build: ./nginx
-    ports:
-      - 80:80
-    depends_on:
-      - 'fennel-service-api'
-      - 'fennel-cli'
-      - 'subservice'
-      - 'database'
-  fennel-service-api:
-    build:
-      context: ./fennel-service-api
-      dockerfile: Dockerfile
-    environment:
-      - DEBUG=True
-      - ADMIN_NAME=""
-      - ADMIN_EMAIL=""
-      - EMAIL_HOST=""
-      - EMAIL_PORT=""
-      - EMAIL_USERNAME=""
-      - EMAIL_PASSWORD=""
-      - DEFAULT_FROM_EMAIL=""
-      - SERVER_EMAIL=""
-      - ENVIRONMENT="LOCAL"
-      - SECRET_KEY=2HY>fXi!dQ&(9Vf.XghCa;L6G=Ul4r-Bwqh>ae0RG3vIh1ZJ%T
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASS=postgres
-      - POSTGRES_NAME=database
-      - ENVIRONMENT=LOCAL
-    depends_on:
-      - 'database'
-      - 'fennel-cli'
-      - 'subservice'
-    entrypoint:
-      - /opt/app/build.sh
-  fennel-cli:
-    build:
-      context: ./fennel-cli
-      dockerfile: Dockerfile
-    entrypoint:
-      - /app/target/release/build/fennel-cli start-api
-  subservice:
-    build:
-      context: ./subservice
-      dockerfile: Dockerfile
-    entrypoint:
-      - /app/npm run start
-    depends_on:
-      - 'fennel-boot'
-  database:
-    image: 'postgres'
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - db:/var/lib/postgresql/data
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - 'fennel-service-api'
+  #     - 'fennel-cli'
+  #     - 'subservice'
+  #     - 'database'
+  # fennel-service-api:
+  #   build:
+  #     context: ./fennel-service-api
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - DEBUG=True
+  #     - ADMIN_NAME=""
+  #     - ADMIN_EMAIL=""
+  #     - EMAIL_HOST=""
+  #     - EMAIL_PORT=""
+  #     - EMAIL_USERNAME=""
+  #     - EMAIL_PASSWORD=""
+  #     - DEFAULT_FROM_EMAIL=""
+  #     - SERVER_EMAIL=""
+  #     - ENVIRONMENT="LOCAL"
+  #     - SECRET_KEY=2HY>fXi!dQ&(9Vf.XghCa;L6G=Ul4r-Bwqh>ae0RG3vIh1ZJ%T
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASS=postgres
+  #     - POSTGRES_NAME=database
+  #     - ENVIRONMENT=LOCAL
+  #   depends_on:
+  #     - 'database'
+  #     - 'fennel-cli'
+  #     - 'subservice'
+  #   entrypoint:
+  #     - /opt/app/build.sh
+  # fennel-cli:
+  #   build:
+  #     context: ./fennel-cli
+  #     dockerfile: Dockerfile
+  #   entrypoint:
+  #     - /app/target/release/build/fennel-cli start-api
+  # subservice:
+  #   build:
+  #     context: ./subservice
+  #     dockerfile: Dockerfile
+  #   entrypoint:
+  #     - /app/npm run start
+  #   depends_on:
+  #     - 'fennel-boot'
+  # database:
+  #   image: 'postgres'
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #     - db:/var/lib/postgresql/data
   fennel-boot:
     build:
       context: ./polkadot
@@ -69,32 +69,32 @@ services:
       dockerfile: Dockerfile-Local
     entrypoint:
       - ./validator-1.sh
-    depends_on:
-      - 'fennel-boot'
+    # depends_on:
+    #   - 'fennel-boot'
   fennel-validator-2:
     build:
       context: ./polkadot
       dockerfile: Dockerfile-Local
     entrypoint:
       - ./validator-2.sh
-    depends_on:
-      - 'fennel-boot'
+    # depends_on:
+    #   - 'fennel-boot'
   fennel-collator-1:
     build:
       context: ./fennel-protocol
       dockerfile: Dockerfile-Local
     entrypoint:
       - ./collator-1.sh
-    depends_on:
-      - 'fennel-boot'
+    # depends_on:
+    #   - 'fennel-boot'
   fennel-collator-2:
     build:
       context: ./fennel-protocol
       dockerfile: Dockerfile-Local
     entrypoint:
       - ./collator-2.sh
-    depends_on:
-      - 'fennel-collator-1'
+    # depends_on:
+    #   - 'fennel-collator-1'
 
-volumes:
-  db:
+# volumes:
+#   db:
