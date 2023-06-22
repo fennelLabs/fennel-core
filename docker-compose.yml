@@ -32,6 +32,9 @@ services:
       - ENVIRONMENT=LOCAL
     depends_on:
       - 'database'
+      - 'fennel-cli'
+      - 'keyserver'
+      - 'subservice'
     entrypoint:
       - /opt/app/build.sh
   fennel-cli:
@@ -71,6 +74,8 @@ services:
       dockerfile: Dockerfile
     entrypoint:
       - /app/npm run start
+    depends_on:
+      - 'fennel-boot'
   database:
     image: 'postgres'
     environment:
@@ -91,24 +96,32 @@ services:
       dockerfile: Dockerfile
     entrypoint:
       - ./validator-1.sh
+    depends_on:
+      - 'fennel-boot'
   fennel-validator-2:
     build:
       context: ./polkadot
       dockerfile: Dockerfile
     entrypoint:
       - ./validator-2.sh
+    depends_on:
+      - 'fennel-boot'
   fennel-collator-1:
     build:
       context: ./fennel-protocol
       dockerfile: Dockerfile
     entrypoint:
       - ./collator-1.sh
+    depends_on:
+      - 'fennel-boot'
   fennel-collator-2:
     build:
       context: ./fennel-protocol
       dockerfile: Dockerfile
     entrypoint:
       - ./collator-2.sh
+    depends_on:
+      - 'fennel-collator-1'
 
 volumes:
   db:
