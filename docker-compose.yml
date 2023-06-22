@@ -43,31 +43,6 @@ services:
       dockerfile: Dockerfile
     entrypoint:
       - /app/target/release/build/fennel-cli start-api
-  keyserver:
-    build:
-      context: ./keyserver
-      dockerfile: Dockerfile
-    environment:
-      - DEBUG=True
-      - ADMIN_NAME=""
-      - ADMIN_EMAIL=""
-      - EMAIL_HOST=""
-      - EMAIL_PORT=""
-      - EMAIL_USERNAME=""
-      - EMAIL_PASSWORD=""
-      - DEFAULT_FROM_EMAIL=""
-      - SERVER_EMAIL=""
-      - ENVIRONMENT="LOCAL"
-      - SECRET_KEY=2HY>fXi!dQ&(9Vf.XghCa;L6G=Ul4r-Bwqh>ae0RG3vIh1ZJ%T
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASS=postgres
-      - POSTGRES_NAME=database
-      - ENVIRONMENT=LOCAL
-    depends_on:
-      - 'database'
-    entrypoint:
-      - /opt/app/build.sh
   subservice:
     build:
       context: ./subservice
