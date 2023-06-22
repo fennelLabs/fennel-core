@@ -32,10 +32,14 @@ services:
       - ENVIRONMENT=LOCAL
     depends_on:
       - 'database'
+    entrypoint:
+      - /opt/app/build.sh
   fennel-cli:
     build:
       context: ./fennel-cli
       dockerfile: Dockerfile
+    entrypoint:
+      - /app/target/release/build/fennel-cli start-api
   keyserver:
     build:
       context: ./keyserver
@@ -59,10 +63,14 @@ services:
       - ENVIRONMENT=LOCAL
     depends_on:
       - 'database'
+    entrypoint:
+      - /opt/app/build.sh
   subservice:
     build:
       context: ./subservice
       dockerfile: Dockerfile
+    entrypoint:
+      - /app/npm run start
   database:
     image: 'postgres'
     environment:
@@ -71,10 +79,36 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - db:/var/lib/postgresql/data
-  # We'll add fennel-protocol once we're ready to start moving on testnet configuration.
-  # fennel-protocol:
-  # We'll also add fennel-api once we're integrating off-chain messaging.
-  # fennel-api:
+  fennel-boot:
+    build:
+      context: ./polkadot
+      dockerfile: Dockerfile
+    entrypoint:
+      - ./boot.sh
+  fennel-validator-1:
+    build:
+      context: ./polkadot
+      dockerfile: Dockerfile
+    entrypoint:
+      - ./validator-1.sh
+  fennel-validator-2:
+    build:
+      context: ./polkadot
+      dockerfile: Dockerfile
+    entrypoint:
+      - ./validator-2.sh
+  fennel-collator-1:
+    build:
+      context: ./fennel-protocol
+      dockerfile: Dockerfile
+    entrypoint:
+      - ./collator-1.sh
+  fennel-collator-2:
+    build:
+      context: ./fennel-protocol
+      dockerfile: Dockerfile
+    entrypoint:
+      - ./collator-2.sh
 
 volumes:
   db:
