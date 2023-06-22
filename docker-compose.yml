@@ -60,13 +60,13 @@ services:
   fennel-boot:
     build:
       context: ./polkadot
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Local
     entrypoint:
       - ./boot.sh
   fennel-validator-1:
     build:
       context: ./polkadot
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Local
     entrypoint:
       - ./validator-1.sh
     depends_on:
@@ -74,7 +74,7 @@ services:
   fennel-validator-2:
     build:
       context: ./polkadot
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Local
     entrypoint:
       - ./validator-2.sh
     depends_on:
