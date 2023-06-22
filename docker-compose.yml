@@ -6,7 +6,6 @@ services:
     depends_on:
       - 'fennel-service-api'
       - 'fennel-cli'
-      - 'keyserver'
       - 'subservice'
       - 'database'
   fennel-service-api:
@@ -33,7 +32,6 @@ services:
     depends_on:
       - 'database'
       - 'fennel-cli'
-      - 'keyserver'
       - 'subservice'
     entrypoint:
       - /opt/app/build.sh
