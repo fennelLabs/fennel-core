@@ -82,7 +82,7 @@ services:
   fennel-collator-1:
     build:
       context: ./fennel-protocol
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Local
     entrypoint:
       - ./collator-1.sh
     depends_on:
@@ -90,7 +90,7 @@ services:
   fennel-collator-2:
     build:
       context: ./fennel-protocol
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Local
     entrypoint:
       - ./collator-2.sh
     depends_on:
