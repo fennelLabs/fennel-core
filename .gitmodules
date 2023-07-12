@@ -13,3 +13,12 @@
 [submodule "polkadot"]
 	path = polkadot
 	url = git@github.com:fennelLabs/polkadot.git
+[submodule "infra"]
+	path = infra
+	url = git@github.com:fennelLabs/infra.git
+[submodule "fennel-lib"]
+	path = fennel-lib
+	url = git@github.com:fennelLabs/fennel-lib.git
+[submodule "whiteflag-rust"]
+	path = whiteflag-rust
+	url = git@github.com:fennelLabs/whiteflag-rust.git
