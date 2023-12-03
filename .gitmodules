@@ -22,3 +22,6 @@
 [submodule "whiteflag-rust"]
 	path = whiteflag-rust
 	url = git@github.com:fennelLabs/whiteflag-rust.git
+[submodule "fennel-solonet"]
+	path = fennel-solonet
+	url = git@github.com:fennelLabs/fennel-solonet.git
